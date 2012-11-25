@@ -20,6 +20,9 @@ a.fork-me:hover {
 }
 
 @media (max-width: 767px) {
+  .hero-unit h1 {
+    font-size: 40px;
+  }
 
   a.fork-me {
     text-indent: 0;
