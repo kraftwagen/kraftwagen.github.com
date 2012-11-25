@@ -24,15 +24,73 @@
     <div class="container">
       <div class="hero-unit">
         <h1>Kraftwagen</h1>
-        <p>Kraftwagen is a set of <a href="http://drupal.org/">Drupal</a> 
-          modules and a <a href="http://drupal.org/project/drush">Drush</a>
-          extension that provide helpfull tools for a <em>everything in 
+        <p>Kraftwagen is a set of tools aimed at 
+          <a href="http://drupal.org/">Drupal</a> developers. It intends to 
+          provide automation for a <em>everything in 
           code</em> and <em>install profile</em>/<code>drush make</code> based 
-          workflow.</p>
+          workflow. Techically, it consists of a 
+          <a href="http://drupal.org/project/drush">Drush</a>
+          extension and a few Drupal modules.</p>
       </div>
 
-      <p>More information  will come soon. In the meantime, you can take a look
-        at <a href="https://github.com/kraftwagen">our GitHub profile.</a></p>
+      <h2>Rationale</h2>
+      <p>
+        When developing larger Drupal based projects, without any tools it 
+        becomes very cumbersome to deploy new versions, work efficiently with 
+        team members, etc. This is because Drupal tends to store everything in
+        the database, including all configuration and all other things you would
+        rather hard-code for your client. Some initiative have been started to
+        changes this, most notably being the 
+        <a href="http://drupal.org/project/features">Features</a> module. 
+        However, there a still a lot of things that will, nor can, ever be build
+        into Features. Kraftwagen aims to be a tool that glues together the 
+        existing tools and fills the gaps.
+      </p>
+
+      <h2>Goals</h2>
+      <p>
+        When we started developing Krafwagen, we set a few goals to reach. Below
+        you'll find a list of them with some explaination.
+      </p>
+
+      <dl>
+        <dt>Everything in code</dt>
+        <dd>We wanted to make sure all the required information to run an 
+          application or website is in the source code. If some developer checks
+          out the project from our Git repository, she should be able the get it
+          running, without a lot of manual steps in Drupal or copying around
+          large database dumps.
+        </dd>
+
+        <dt>Don't reinvent the wheel</dt>
+        <dd>A lot of effort has already been done in this area and we wanted to
+          build on top of that. That's why Kraftwagen uses the Features module
+          and is build completely on top of Drush. Some of the most used 
+          Kraftwagen commands are only thin convience wrappers around existings 
+          commands or sequences of commands. This also means that most concepts
+          in Kraftwagen should sound familiar to any seasoned Drupal developer.
+        </dd>
+
+        <dt>Version control independence</dt>
+        <dd>
+          We didn't want a tool that locks us completely with Subversion, Git or
+          any other version control mechanism. Of course with serious projects
+          you'll really want some sort of version control, but your toolchain
+          should not depend on it. <em>Currently, there is one Git dependend 
+          command. The command to start a new project uses Git to download the 
+          skeleton. We are looking at a way to elegantly solve this, while 
+          keeping the convenience of the current command.</em>
+        </dd>
+
+        <dt>Environment awareness</dt>
+        <dd>
+          Drupal itself doesn't make any difference between production and 
+          development enviroments. In production you'll want the 
+          <a href="http://drupal.org/project/devel">Devel</a> module disabled,
+          while in development environments it should be enabled. When copying
+          around database dumps this is almost impossible to do automatically.
+        <dt>
+      </dl>
 
       <hr>
       <footer>
@@ -44,6 +102,6 @@
     <a href="https://github.com/kraftwagen" class="fork-me"><i class="icon-github"></i> Fork me on Github</a>
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
   </body>
 </html>
