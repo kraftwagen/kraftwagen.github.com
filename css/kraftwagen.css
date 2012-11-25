@@ -2,6 +2,31 @@ body {
   padding-top: 60px;
   padding-bottom: 40px;
 }
+
+.kw-sidenav.affix {
+  top: 10px;
+}
+
+header.get-started {
+  height: 100px;
+}
+
+@media (min-width: 980px) {
+  .kw-sidenav {
+    width: 270px;
+  }
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  .kw-sidenav {
+    width: 198px;
+  }
+}
+@media (max-width: 767px) {
+  .kw-sidenav{
+    display: none;
+  }
+}
+
 a.fork-me {
   display: block;
   border: 0;
