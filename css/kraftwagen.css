@@ -2,3 +2,37 @@ body {
   padding-top: 60px;
   padding-bottom: 40px;
 }
+a.fork-me {
+  display: block;
+  border: 0;
+  position: absolute; 
+  top: 0; 
+  right: 0;
+
+  text-indent: -9999px;
+  height: 150px;
+  width: 150px;
+  background: url("https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png") no-repeat top right;
+  text-decoration: none;
+}
+a.fork-me:hover {
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+
+  a.fork-me {
+    text-indent: 0;
+    background: #eeeeee;
+    -webkit-border-radius: 6px;
+       -moz-border-radius: 6px;
+            border-radius: 6px;
+    padding: 15px;
+    height: auto;
+    width: auto;
+    position: relative
+  }
+  a.fork-me i {
+    color: black;
+  }
+}
