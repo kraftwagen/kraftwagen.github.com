@@ -24,35 +24,70 @@
     <div class="container">
       <div class="hero-unit">
         <h1>Kraftwagen</h1>
-        <p>Kraftwagen is a set of tools aimed at 
-          <a href="http://drupal.org/">Drupal</a> developers. It intends to 
-          provide automation for a <em>everything in 
-          code</em> and <em>install profile</em>/<code>drush make</code> based 
-          workflow. Techically, it consists of a 
-          <a href="http://drupal.org/project/drush">Drush</a>
-          extension and a few Drupal modules.</p>
+        <p>
+          Kraftwagen enables the use of <a href="http://drupal.org/">Drupal</a>
+          with large (distributed) development teams and staged deployments.
+        </p>
+        <p>
+          It does so by facilitating:
+          <ol>
+            <li>Everything in code&trade;, under version control</li>
+            <li>Multiple deployment targets (local, staging, production, etc.)</li>
+            <li>Kick-starting new projects from <a href="https://github.com/kraftwagen/skeleton">skeletons</a></li>
+          </ol>
+        </p>
 
-        <a href="/get-started.html" class="btn btn-success"><i class="icon-cogs"></i> Get started</a>
+        <a href="/get-started.html" class="btn btn-success btn-large"><i class="icon-cogs"></i>Get started!</a>
       </div>
 
-      <h2>Rationale</h2>
+      <h2>Drupal + Kraftwagen = Drupal for developers</h2>
       <p>
-        When developing larger Drupal based projects, without any tools it 
-        becomes very cumbersome to deploy new versions, work efficiently with 
-        team members, etc. This is because Drupal tends to store everything in
-        the database, including all configuration and all other things you would
-        rather hard-code for your client. Some initiative have been started to
-        changes this, most notably being the 
-        <a href="http://drupal.org/project/features">Features</a> module. 
-        However, there a still a lot of things that will, nor can, ever be build
-        into Features. Kraftwagen aims to be a tool that glues together the 
-        existing tools and fills the gaps.
+        One of the core values of Drupal is "easy to use", but this value has a
+        different meaning for an end-user (who uses FTP to upload Drupal to a
+        web host, and customizes it though the admin interface), then for
+        developers (who customize Drupal extensively, need staged deployments
+        and use version control systems to collaborate). Kraftwagen makes
+        Drupal "easy to use" for developers.
+      </p>
+      
+      <h2>How does it work?</h2>
+      <p>
+        Kraftwagen consists of a <a href="http://drupal.org/project/drush">Drush</a>
+        extension and set of Drupal modules, all <a href="https://github.com/kraftwagen">hosted on github</a>.
+        It reuses existing work where possible, for example: install profiles,
+        drush make, <a href="http://drupal.org/project/features">Features</a>,
+        version control and soon capistrano.
+      </p>
+      <p>
+        Because Drupal stores a lot a configuration details in the database,
+        version control systems cannot be used to track changes. This makes it
+        hard for a team of developers to collaborate or to stage changes to a
+        separate deployment target before rolling them out in production.
+        Kraftwagen primarily solves this issue by using 'manifests' sync aspects
+        different installations of a Drupal project to the same state, these
+        aspects could be configuration details in the database, creation
+        of base-line content, setting up static files or any other aspect of
+        a Drupal project that can be controlled from PHP.
+      </p>
+      <p>
+        Kraftwagen extends Drupal with:
+        <ol>
+          <li><b>The <a href="https://github.com/kraftwagen/kraftwagen">kraftwagen</a> Drush extension</b>
+            &mdash; provides a set of Drush commands to manage an install
+            profile based Drupal development and deployment workflow.</li>
+          <li><b>The <a href="https://github.com/kraftwagen/kw-itemnames">kw-itemnames</a> Drupal module</b>
+            &mdash; allowes human names to be assigned to items that are
+            mapped to numeric primary keys.</li>
+          <li><b>The <a href="https://github.com/kraftwagen/kw-environment">kw-environment</a> Drupal module</b>
+            &mdash; makes the current deployment environment available in Drupal.</li>
+          <li><b>The <a href="https://github.com/kraftwagen/kw-manifests">kw-manifests</a> Drupal module</b>
+            &mdash; adds support idempotent migrations (manifests).</li>
+        </ol>
       </p>
 
       <h2>Goals</h2>
       <p>
-        When we started developing Krafwagen, we set a few goals to reach. Below
-        you'll find a list of them with some explaination.
+        The following goals where set when developing Krafwagen:
       </p>
 
       <dl>
@@ -86,11 +121,20 @@
 
         <dt>Environment awareness</dt>
         <dd>
-          Drupal itself doesn't make any difference between production and 
-          development enviroments. In production you'll want the 
+          Drupal itself doesn't make any difference between staging, production 
+          and development enviroments. In production you'll want the 
           <a href="http://drupal.org/project/devel">Devel</a> module disabled,
           while in development environments it should be enabled. When copying
           around database dumps this is almost impossible to do automatically.
+        <dt>
+
+        <dt>Transparent in use</dt>
+        <dd>
+          Developers should naturally understand the workflows that Kraftwagen
+          facilitates. Therefore Kraftwagen's command line commands report
+          what they are doing and error messages are constructive.
+          <a href="/get-started.html">Getting started</a> with Kraftwagen
+          should be a breeze for any seasoned Drupal developer.
         <dt>
       </dl>
 
