@@ -2,11 +2,13 @@
   $(function () {
     var $window = $(window);
 
-    $('.kw-sidenav').affix({
+    $('.kw-sidebar-inner').affix({
       offset: {
-        top: 150
+        top: 120
       }
     });
+
+    window.prettyPrint && prettyPrint();
 
   });
 

@@ -11,6 +11,7 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/prettify.css" rel="stylesheet">
 
     <link href="/css/kraftwagen.css" rel="stylesheet">
 
@@ -29,12 +30,14 @@
     <div class="container">
       <div class="row">
         <div class="span4 kw-sidebar">
+          <div class="kw-sidebar-inner">
             <ul class="nav nav-list kw-sidenav">
               <li><a href="#installation"><i class="icon-download-alt"></i> Installation</a></li>
               <li><a href="#new-project"><i class="icon-plus-sign"></i> New project</a></li>
               <li><a href="#setup-project"><i class="icon-bolt"></i> Setting up projects</a></li>
               <li><a href="#build"><i class="icon-magic"></i> Creating a build</a></li>
             </ul>
+          </div>
         </div>
 
         <div class="span8">
@@ -46,7 +49,7 @@
           </p>
           <section id="installation">
             <div class="page-header">
-              <h1>Installation</h1>
+              <h2>Installation</h2>
             </div>
             <p>
               Kraftwagen builds heavily on
@@ -65,7 +68,7 @@
               this.
             </p>
 
-            <h2>Per project</h2>
+            <h3>Per project</h3>
             <p>
               If you prefer to keep a Drush and Kraftwagen installation per
               project, Kraftwagen provides a little tool for that. Change to the
@@ -78,7 +81,7 @@
 
           <section id="new-project">
             <div class="page-header">
-              <h1>Create a new project</h1>
+              <h2>Create a new project</h2>
             </div>
 
             <p>
@@ -93,7 +96,14 @@
 
             <p>
               Start by creating a directory for your project and changing to
-              this directory. Then run <code>drush kw-new-project</code> in this
+              this directory. 
+            </p>
+<pre class="prettyprint lang-bash">cd /path/to/projects
+mkdir MyProject
+cd MyProject
+</pre>
+            <p>
+              Then run <code>drush kw-new-project</code> in this
               directory. This command will ask for the human readable name of
               the project and the machine name of the project. Then it will ask
               for the location of the skeleton repository and which branch to
@@ -127,7 +137,7 @@
 
           <section id="setup-project">
             <div class="page-header">
-              <h1>Setting up existing projects</h1>
+              <h2>Setting up existing projects</h2>
             </div>
 
             <p>
@@ -185,21 +195,22 @@
 
           <section id="build">
             <div class="page-header">
-              <h1>Creating a build</h1>
+              <h2>Creating a build</h2>
             </div>
 
             <p>
               The source of the project is not a working Drupal installation. It
               doesn't even contain Drupal itself. A working Drupal installation
-              that is generated from the source is called a 'build'.
+              that is generated from the source is called a <em>build</em>.
             </p>
             <p>
               By default the build is created in a directory <code>build</code>.
               If you prefer to keep a directory of all builds and prefer
               <code>build</code> to be a symlink to the current build, you only
               have to create a directory <code>builds</code>. Kraftwagen will
-              automatically create the build there if it exists and create a
-              symlink for you.
+              automatically create the build in the <code>builds</code> 
+              directory if it exists and create a symlink from 
+              <code>build</code> to the latest build for you.
             </p>
             <p>
               A build is created by running <code>drush kw-build</code>.
@@ -217,6 +228,7 @@
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="/js/bootstrap.js"></script>
+    <script src="/js/prettify.js"></script>
     <script src="/js/app.js"></script>
     <script type="text/javascript">var _gaq = [['_setAccount', 'UA-36687951-1'], ['_trackPageview']];</script>
     <script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
