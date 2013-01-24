@@ -5,7 +5,7 @@
 
     <title>Kraftwagen</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kraftwagen is a set of Drupal Tools for a everything in code and install profile / drush make based workflow.">
+    <meta name="description" content="Kraftwagen enables the use of Drupal with large (distributed) development teams and staged deployments.">
     <meta name="author" content="Rolf van de Krol">
 
     <link href="/css/bootstrap.css" rel="stylesheet">
@@ -24,39 +24,45 @@
     <div class="container">
       <div class="hero-unit">
         <h1>Kraftwagen</h1>
+        <p>&nbsp;</p>
         <p>
-          Kraftwagen enables the use of <a href="http://drupal.org/">Drupal</a>
-          with large (distributed) development teams and staged deployments.
+          <a href="http://drupal.org/">Drupal</a> for large (distributed)
+          development teams and staged deployments.
         </p>
         <p>
-          It does so by facilitating:
-          <ol>
+          It facilitates:
+          <ul>
             <li>Everything in code&trade;, under version control</li>
             <li>Multiple deployment targets (local, staging, production, etc.)</li>
             <li>Kick-starting new projects from <a href="https://github.com/kraftwagen/skeleton">skeletons</a></li>
-          </ol>
+          </ul>
         </p>
-
+        <p>&nbsp;</p>
         <a href="/get-started.html" class="btn btn-success btn-large"><i class="icon-cogs"></i> Get started!</a>
       </div>
 
       <h2>Drupal + Kraftwagen = Drupal for developers</h2>
       <p>
-        One of the core values of Drupal is "easy to use", but this value has a
-        different meaning for an end-user (who uses FTP to upload Drupal to a
-        web host, and customizes it though the admin interface), then for
+        One of the core values of Drupal is "easy to use", but what that means
+        end-users (who uses FTP to upload Drupal to a web host, and customizes
+        it though the admin interface), is something else then what it means for
         developers (who customize Drupal extensively, need staged deployments
-        and use version control systems to collaborate). Kraftwagen makes
-        Drupal "easy to use" for developers.
+        and use version control systems to collaborate).
       </p>
+      <p>
+        Kraftwagen makes Drupal "easy to use" for developers.
+      </p>
+      <p>&nbsp;</p>
       
       <h2>How does it work?</h2>
       <p>
         Kraftwagen consists of a <a href="http://drupal.org/project/drush">Drush</a>
-        extension and set of Drupal modules, all <a href="https://github.com/kraftwagen">hosted on github</a>.
+        extension and set of Drupal modules, all
+        <a rel="license" href="http://www.gnu.org/licenses/gpl">open source</a>
+        and <a href="https://github.com/kraftwagen">hosted on github</a>.
         It reuses existing work where possible, for example: install profiles,
         drush make, <a href="http://drupal.org/project/features">Features</a>,
-        version control and soon capistrano.
+        version control and soon <a href="https://github.com/capistrano/capistrano">Capistrano</a>.
       </p>
       <p>
         Because Drupal stores a lot a configuration details in the database,
@@ -71,25 +77,24 @@
       </p>
       <p>
         Kraftwagen extends Drupal with:
-        <ol>
-          <li><b>The <a href="https://github.com/kraftwagen/kraftwagen">kraftwagen</a> Drush extension</b>
+        <ul>
+          <li>The <b><a href="https://github.com/kraftwagen/kraftwagen">kraftwagen</a></b> Drush extension
             &mdash; provides a set of Drush commands to manage an install
             profile based Drupal development and deployment workflow.</li>
-          <li><b>The <a href="https://github.com/kraftwagen/kw-itemnames">kw-itemnames</a> Drupal module</b>
+          <li>The <b><a href="https://github.com/kraftwagen/kw-itemnames">kw-itemnames</a></b> Drupal module
             &mdash; allowes human names to be assigned to items that are
             mapped to numeric primary keys.</li>
-          <li><b>The <a href="https://github.com/kraftwagen/kw-environment">kw-environment</a> Drupal module</b>
+          <li>The <b><a href="https://github.com/kraftwagen/kw-environment">kw-environment</a></b> Drupal module
             &mdash; makes the current deployment environment available in Drupal.</li>
-          <li><b>The <a href="https://github.com/kraftwagen/kw-manifests">kw-manifests</a> Drupal module</b>
+          <li>The <b><a href="https://github.com/kraftwagen/kw-manifests">kw-manifests</a></b> Drupal module
             &mdash; adds support idempotent migrations (manifests).</li>
-        </ol>
+        </ul>
       </p>
+      <p>&nbsp;</p>
 
       <h2>Goals</h2>
       <p>
         The following goals where set when developing Krafwagen:
-      </p>
-
       <dl>
         <dt>Everything in code</dt>
         <dd>We wanted to make sure all the required information to run an 
@@ -137,10 +142,14 @@
           should be a breeze for any seasoned Drupal developer.
         <dt>
       </dl>
+      </p>
+      <p>&nbsp;</p>
 
       <hr>
       <footer>
-        <p>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a></p>
+        <p>
+          This work is licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a> 
+        </p>
       </footer>
 
     </div>
