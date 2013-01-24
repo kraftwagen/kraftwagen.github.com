@@ -39,9 +39,9 @@
 
         <div class="span8">
           <p>
-            Using <a href="/">Kraftwagen</a> in your own projects is fairly 
-            easy, especially if you are a seasoned Drupal developer already. 
-            This page is aimed at developers that are already familiar with 
+            Using <a href="/">Kraftwagen</a> in your own projects is fairly
+            easy, especially if you are a seasoned Drupal developer already.
+            This page is aimed at developers that are already familiar with
             Drupal.
           </p>
           <section id="installation">
@@ -49,20 +49,27 @@
               <h1>Installation</h1>
             </div>
             <p>
+              Kraftwagen builds heavily on
+              <a href="http://drupal.org/project/drush">Drush</a>. All command
+              line interactions with Kraftwagen are done using Drush.
+            </p>
+            <p>
               To install Kraftwagen, you will need to install Drush and install
               Kraftwagen at a location where Drush can reach it. Drush can be
               installed globally or in your home directory. Take a look at the
               Drush documentation for more information about this. After you
               installed Drush you can install Kraftwagen as any other extension
-              in the global directory (<code>/usr/share/drush/commands</code>) 
-              or in your home directory (<code>~/.drush</code>). Make sure to clear your drush cache with (<code>drush cc drush</code>) after this. 
+              in the global directory (<code>/usr/share/drush/commands</code>)
+              or in your home directory (<code>~/.drush</code>). Make sure to
+              clear your drush cache with <code>drush cc drush</code> after
+              this.
             </p>
 
             <h2>Per project</h2>
             <p>
-              If you prefer to keep a Drush and Kraftwagen installation per 
+              If you prefer to keep a Drush and Kraftwagen installation per
               project, Kraftwagen provides a little tool for that. Change to the
-              directory your project in located in (not the <code>src</code> 
+              directory your project in located in (not the <code>src</code>
               dir, but the project root directory). Take a look at our
               <a href="https://github.com/kraftwagen/tools">Kraftwagen Tools
               repository</a>.
@@ -75,21 +82,21 @@
             </div>
 
             <p>
-              Creating a new project is done using the 
+              Creating a new project is done using the
               <code>drush kw-new-project</code> command. This command uses a so
               called <em>skeleton</em> to kickstart a project. A skeleton for
-              Kraftwagen is a Git repository that contains the starting point 
-              for a project. Kraftwagen provides an 
+              Kraftwagen is a Git repository that contains the starting point
+              for a project. Kraftwagen provides an
               <a href="https://github.com/kraftwagen/skeleton">example
               skeleton</a> which you can fork to create your own.
             </p>
 
             <p>
-              Start by creating a directory for your project and changing to 
+              Start by creating a directory for your project and changing to
               this directory. Then run <code>drush kw-new-project</code> in this
-              directory. This command will ask for the human readable name of 
+              directory. This command will ask for the human readable name of
               the project and the machine name of the project. Then it will ask
-              for the location of the skeleton repository and which branch to 
+              for the location of the skeleton repository and which branch to
               us from the repository. When you supplied all the information, it
               will clone the skeleton repository and create a <code>src</code>
               directory in your current directory that contains the source of
@@ -97,14 +104,23 @@
             </p>
 
             <p>
-              Now the source of the project is created. We advise you to use 
+              Now the source of the project is created. We advise you to use
               your favorite version control system to create the initial commit
-              of your project. 
+              of your project.
             </p>
 
             <p>
-              You're now at the same state as 
-              <a href="#setup-project-sub">after checking out an existing 
+              The source of a Kraftwagen projects is a Drupal install profile.
+              Drupal core and contributed modules are pulled in using Drush make
+              and `.make` files. This keeps your repository clean and
+              maintainable. A great advantage is, that with such a small
+              repository it actually is feasible to walk trough all the code to
+              review it.
+            </p>
+
+            <p>
+              You're now at the same state as
+              <a href="#setup-project-sub">after checking out an existing
               project</a>.
             </p>
           </section>
@@ -123,15 +139,42 @@
             </p>
 
             <p id="setup-project-sub">
-              Now run <code>drush kw-setup</code>. This will create a 
-              <code>cnf</code> directory with settings files, an 
-              <code>environment</code> file and a <code>files</code> directory.
-              You should change the <code>settings.local.php</code> file to 
-              match your settings. You should choose the correct database
-              credentials in this file. Furthermore, if you want to use the
-              development settings, you should changes the contents to the
-              <code>enviroment</code> file to the 'development' (omit the 
-              quotes).
+              Now run <code>drush kw-setup</code>. This will create a
+              <code>cnf</code> directory with some files and directories in it.
+            </p>
+
+            <dl>
+              <dt><code>settings.php</code> and <code>settings.local.php</code></dt>
+              <dd>
+                The settings files are copied from the <code>src/cnf</code>
+                directory. These files contain target-specific settings for your
+                Drupal installation. When generating a working Drupal
+                installation from the <code>src</code> (we call that a
+                <em>build</em> in Kraftwagen), these files are symlinked to the
+                right place in the installation.
+              </dd>
+              <dt><code>environment</code></dt>
+              <dd>
+                This file by default contains <code>production</code>. The
+                contents of this file controls which environment-specific
+                dependencies are installed and which environment-specific
+                manifests are run.
+              </dd>
+              <dt><code>files</code></dt>
+              <dd>
+                The <code>files</code> directory is an empty directory. It is
+                used to store the files that are uploaded by the user. The
+                directory will be symlinked to the correct place when generating
+                a build (just like the settings files).
+              </dd>
+            </dl>
+            <p>
+
+            <p>
+              You should change the <code>settings.local.php</code> file to be
+              able to connect to the database. Furthermore, if you want to use
+              the development settings, you should changes the contents to the
+              <code>enviroment</code> file to <code>development</code>.
             </p>
 
             <p>
@@ -148,7 +191,7 @@
             <p>
               The source of the project is not a working Drupal installation. It
               doesn't even contain Drupal itself. A working Drupal installation
-              that is generated from the source is called a 'build'. 
+              that is generated from the source is called a 'build'.
             </p>
             <p>
               By default the build is created in a directory <code>build</code>.
@@ -159,7 +202,7 @@
               symlink for you.
             </p>
             <p>
-              A build is created by running <code>drush kw-build</code>. 
+              A build is created by running <code>drush kw-build</code>.
             </p>
           </section>
         </div>
