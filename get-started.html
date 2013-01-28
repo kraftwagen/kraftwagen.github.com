@@ -32,10 +32,11 @@
         <div class="span4 kw-sidebar">
           <div class="kw-sidebar-inner">
             <ul class="nav nav-list kw-sidenav">
-              <li><a href="#installation"><i class="icon-download-alt"></i> Get it</a></li>
+              <li><a href="#installation"><i class="icon-download-alt"></i> Get Kraftwagen</a></li>
               <li><a href="#new-project"><i class="icon-plus-sign"></i> New project</a></li>
-              <li><a href="#setup-project"><i class="icon-bolt"></i> Setting up projects</a></li>
-              <li><a href="#build"><i class="icon-magic"></i> Creating a build</a></li>
+              <li><a href="#setup-project"><i class="icon-bolt"></i> Existing project</a></li>
+              <li><a href="#build"><i class="icon-magic"></i> Building</a></li>
+              <li><a href="#conclusion"><i class="icon-ok"></i> Conclusion</a></li>
             </ul>
           </div>
         </div>
@@ -47,25 +48,26 @@
           </p>
           <section id="installation">
             <div class="page-header">
-              <h2>Installation</h2>
+              <h2>Get Kragenwagen</h2>
             </div>
             <p>
-              First make sure to have <a href="http://drupal.org/project/drush">Drush
-              installed</a>. Kraftwagen builds it's command line interface on Drush.
+              First make sure to have 
+              <a href="http://drupal.org/project/drush">Drush 5.x</a> installed. 
+              Kraftwagen builds its command line interface on Drush.
             </p>
             <p>
-              Go to the directory where Drush expects extensions &mdash; on Unix/OSX
-              this is usually <code>~/.drush</code> &mdash; and clone the Kraftwagen
-              Drush extension from GitHub:
+              Go to the directory where Drush expects extensions &mdash; on 
+              Unix/OSX this is usually <code>~/.drush</code> &mdash; and clone 
+              the Kraftwagen Drush extension from GitHub. After this you should
+              clear the drush command cache.
+            </p>
 <pre class="prettyprint lang-bash">cd ~/.drush
 git clone git@github.com:kraftwagen/kraftwagen.git
+drush cc drush
 </pre>
-              You can keep your Kraftwagen up-to-date by doing a <code>git pull</code>
-              from its directory.
-            </p>
             <p>
-              If you have no idea what GitHub and Drush are then Kraftwagen is
-              probably not for you... Sorry.
+              You can keep your Kraftwagen up-to-date by doing a 
+              <code>git pull</code> from its directory.
             </p>
 
             <h3>Per project</h3>
@@ -81,55 +83,72 @@ git clone git@github.com:kraftwagen/kraftwagen.git
               <h2>Create a new project</h2>
             </div>
 
-            <p>
 <pre class="prettyprint lang-bash">
 cd ~
 mkdir example_project
 cd example_project
 drush kw-new-project</pre>
-              The <code>kw-new-project</code> command will ask some questions &mdash;
-              a the project name (both human and machine) and the location of a
-              <em>skeleton repository</em> &mdash; after which it will use a clone the
-              <em>skeleton repository</em> to generate your project files in
-              <code>~/example_project/src</code>.
+            <p>
+              The <code>kw-new-project</code> command will ask some questions 
+              &mdash; a the project name (both human and machine) and the 
+              location of a <em>skeleton repository</em> &mdash; after which it
+              will use a clone the <em>skeleton repository</em> to generate your
+              project files in <code>~/example_project/src</code>.
             </p>
             <p>
-              We maintain an <a href="https://github.com/kraftwagen/skeleton">basic
-              skeleton repository</a> on GitHub from which you can use (simply fork to
+              We maintain an 
+              <a href="https://github.com/kraftwagen/skeleton">basic skeleton 
+              repository</a> on GitHub from which you can use (simply fork to
               create your own <em>skeletons</em>).
             </p>
 
             <p>
-              Now the source of the project is created in <code>src</code>, this is the
-              direcorry that you would usually want under version crontrol.
+              Now the source of the project is created in <code>src</code>. This
+              is the directory that you would usually want under version 
+              control.
             </p>
 
             <p>
               The source of a Kraftwagen project is a
-              <a href="http://drupal.org/developing/distributions">Drupal install
-              profile</a>. Both Drupal core and contributed modules are pulled in
-              using Drush' own <code>make</code> command and some <code>.make</code>
-              files. This way <em>your</em> repository only contains <em>YOUR</em> code.
+              <a href="http://drupal.org/developing/distributions">Drupal 
+              install profile</a>. Both Drupal core and contributed modules are
+              pulled in using Drush' own <code>make</code> command and some 
+              <code>.make</code> files. This way <em>your</em> repository only
+              contains <strong>your</strong> code.
             </p>
 
             <p>
-              If you have an existing Kraftwagen project under version control you
-              simply create a directory for that project, change to it, and
-              clone/checkout the source code into <code>src</code>.
+              You're now at the same state as 
+              <a href="#setup-project-sub">after checking out an existing 
+              project</a>.
             </p>
           </section>
 
           <section id="setup-project">
             <div class="page-header">
-              <h2>Adding Kraftwagen to existing Drupal projects</h2>
+              <h2>Get an existing project running</h2>
             </div>
 
-            <p id="setup-project-sub">
+            <p>
+              If you have an existing Kraftwagen project under version control
+              you simply create a directory for that project, change to it, and
+              clone/checkout the source code into <code>src</code>.
+            </p>
+
+<pre class="prettyprint lang-bash">
+cd ~
+mkdir example_project
+cd example_project
+git clone [repository_url] src
+</pre>
+            <h3 id="setup-project-sub">Run setup</h3>
+            <p>
+
 <pre class="prettyprint lang-bash">
 cd ~/example_project
 drush kw-setup</pre>
-              This will creates the <code>cnf</code> directory with the following
-              files and directories in it:
+              This will creates the <code>cnf</code> directory with the 
+              following files and directories in it:
             </p>
 
             <dl>
@@ -143,7 +162,7 @@ drush kw-setup</pre>
               <dt><code>environment</code></dt>
               <dd>
                 This file by default contains one word <code>production</code>,
-                it is used to determain which environment we currently run in.
+                it is used to determine which environment we currently run in.
               </dd>
               <dt><code>files</code></dt>
               <dd>
@@ -162,8 +181,8 @@ drush kw-setup</pre>
             </p>
 
             <p>
-              You're now ready to <a href="#build">build</a> your first Kraftwagen
-              managed Drupal installation.
+              You're now ready to <a href="#build">build</a> your first 
+              Kraftwagen managed Drupal installation.
             </p>
           </section>
 
@@ -182,16 +201,23 @@ cd ~/example_project
 drush kw-build</pre>
             
             <p>
-              By default the build is created in the <code>build</code> directory.
-              If you prefer to keep a directory of all builds and prefer
-              <code>build</code> to be a symlink to the current build simply create
-              a directory called <code>builds</code> (with an "s"), and Kraftwagen will
-              automatically create the build in there and update a symlink from 
-              <code>build</code> to the directory of the latest build for you.
+              By default the build is created in the <code>build</code> 
+              directory. If you prefer to keep a directory of all builds and 
+              prefer <code>build</code> to be a symlink to the current build 
+              simply create a directory called <code>builds</code> (with an 
+              "s"), and Kraftwagen will automatically create the build in there
+              and update a symlink from <code>build</code> to the directory of 
+              the latest build for you. The <code>build</code> is usually where
+              you want to point your webserver at.
             </p>
+          </section>
+
+          <section id="conclusion">
+            <div class="page-header">
+              <h2>Conclusion</h2>
+            </div>
             <p>
-              The <code>build</code> is usually where you want to point your webserver at.
-              Enjoy the ride with Kraftwagen... Any questions or remarks: find us on
+              Enjoy the ride with Kraftwagen&hellip; Any questions or remarks: find us on
               <a href="https://github.com/kraftwagen">GitHub</a>!
             </p>
           </section>
