@@ -16,9 +16,9 @@ dd {
   top: 40px;
 }
 
-.kw-sidebar-inner {
-  background: url('../img/logo-small.png') no-repeat top center;
-  padding-top: 200px;
+.kw-sidebar .logo {
+  margin: 20px auto 30px;
+  width: 198px;
 }
 
 header.get-started {
