@@ -8,8 +8,6 @@
       }
     });
 
-    window.prettyPrint && prettyPrint();
-
   });
 
 }(window.jQuery);
