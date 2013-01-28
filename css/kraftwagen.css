@@ -12,10 +12,6 @@ dd {
   margin-bottom: 20px;
 }
 
-h2 {
-  margin-top: 50px;
-}
-
 .kw-sidebar-inner.affix {
   top: 40px;
 }
@@ -78,6 +74,8 @@ footer p {
 .page-header {
   margin-bottom: 10px;
   padding-bottom: 0;
+  margin-top: 0;
+  padding-top: 20px
 }
 .page-header h2 {
   margin-bottom: 0;
