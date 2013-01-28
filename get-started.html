@@ -62,8 +62,8 @@
               the Kraftwagen Drush extension from GitHub. After this you should
               clear the drush command cache.
             </p>
-<pre class="prettyprint lang-bash">cd ~/.drush
-git clone git@github.com:kraftwagen/kraftwagen.git
+<pre class="prettyprint lang-sh">cd ~/.drush
+git clone "git://github.com/kraftwagen/kraftwagen.git"
 drush cc drush
 </pre>
             <p>
@@ -84,7 +84,7 @@ drush cc drush
               <h2>Create a new project</h2>
             </div>
 
-<pre class="prettyprint lang-bash">
+<pre class="prettyprint lang-sh">
 cd ~
 mkdir example_project
 cd example_project
@@ -136,7 +136,7 @@ drush kw-new-project</pre>
               clone/checkout the source code into <code>src</code>.
             </p>
 
-<pre class="prettyprint lang-bash">
+<pre class="prettyprint lang-sh">
 cd ~
 mkdir example_project
 cd example_project
@@ -145,7 +145,7 @@ git clone [repository_url] src
             <h3 id="setup-project-sub">Run setup</h3>
             <p>
 
-<pre class="prettyprint lang-bash">
+<pre class="prettyprint lang-sh">
 cd ~/example_project
 drush kw-setup</pre>
               This will creates the <code>cnf</code> directory with the 
@@ -197,7 +197,7 @@ drush kw-setup</pre>
               doesn't even contain Drupal itself. It needs to be <em>build</em>.
             </p>
             
-<pre class="prettyprint lang-bash">
+<pre class="prettyprint lang-sh">
 cd ~/example_project
 drush kw-build</pre>
             
