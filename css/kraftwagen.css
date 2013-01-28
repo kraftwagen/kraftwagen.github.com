@@ -66,9 +66,14 @@ header.get-started {
   text-align: center;
 }
 
+footer {
+  margin-top: 70px;
+}
+
 footer p {
   font-size: 14px;
   text-align: center;
+  line-height: 20px;
 }
 
 .page-header {
