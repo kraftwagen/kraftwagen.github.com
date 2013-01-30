@@ -6,6 +6,7 @@
     <title>Kraftwagen</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Kraftwagen enables the use of Drupal with large (distributed) development teams and staged deployments.">
+    <meta name="keywords" content="drupal, kraftwagen, drush, developers, deployment, collaborate, version control, git, svn">
     <meta name="author" content="Rolf van de Krol">
 
     <link href="/css/bootstrap.css" rel="stylesheet">
@@ -32,11 +33,13 @@
           <ul>
             <li><i class="icon-hand-right"></i> Everything in code&trade;, under version control</li>
             <li><i class="icon-hand-right"></i> Multiple deployment targets (local, staging, production, etc.)</li>
-            <li><i class="icon-hand-right"></i> Kick-starting new projects from <a href="https://github.com/kraftwagen/skeleton">skeletons</a></li>
+            <li><i class="icon-hand-right"></i> Kick-start new projects from <a href="https://github.com/kraftwagen/skeleton">skeletons</a></li>
           </ul>
         </p>
         <p>
-          <a href="/get-started.html" class="btn btn-success btn-large"><i class="icon-cogs"></i> Get started!</a>
+          <a href="/get-started.html" class="btn btn-success btn-large">
+            &nbsp;&nbsp;<i class="icon-cogs"></i>&nbsp;&nbsp;<strong>Get started!</strong>&nbsp;&nbsp;
+          </a>
         </p>
       </div>
 
@@ -44,15 +47,15 @@
         <h2>Drupal + Kraftwagen = Drupal for developers</h2>
       </div>
       <p>
-        One of the core values of <a href="http://drupal.org/">Drupal</a> is 
-        "easy to use", but what that means
+        One of <a href="http://drupal.org/">Drupal</a>’s core values is 
+        “easy to use”.  Yet what that means to
         end-users (who uses FTP to upload Drupal to a web host, and customizes
-        it though the admin interface), is something else then what it means for
+        it though the admin interface), is different from what that means to
         developers (who customize Drupal extensively, need staged deployments
         and use version control systems to collaborate).
       </p>
       <p>
-        Kraftwagen makes Drupal "easy to use" for developers.
+        Kraftwagen makes Drupal “easy to use” for developers.
       </p>
 
       <div class="page-header">
@@ -63,20 +66,24 @@
         extension and set of Drupal modules, all
         <a rel="license" href="http://www.gnu.org/licenses/gpl">open source</a>
         and <a href="https://github.com/kraftwagen">hosted on github</a>.
-        It reuses existing work where possible, for example: install profiles,
-        drush make, <a href="http://drupal.org/project/features">Features</a>,
-        version control and soon <a href="https://github.com/capistrano/capistrano">Capistrano</a>.
+        It reuses existing work where possible, for example:
+        <a href="http://drupal.org/project/distributions">install profiles</a>,
+        <a href="http://drupal.org/project/drush_make">Drush Make</a>,
+        <a href="http://drupal.org/project/features">Features</a>,
+        version control systems (git, subversion, mercurial, etc.) and soon
+        <a href="https://github.com/capistrano/capistrano">Capistrano</a>.
       </p>
       <p>
         Because Drupal stores a lot a configuration details in the database,
         version control systems cannot be used to track changes. This makes it
         hard for a team of developers to collaborate or to stage changes to a
         separate deployment target before rolling them out in production.
-        Kraftwagen primarily solves this issue by using 'manifests' sync aspects
-        different installations of a Drupal project to the same state, these
-        aspects could be configuration details in the database, creation
-        of base-line content, setting up static files or any other aspect of
-        a Drupal project that can be controlled from PHP.
+        Kraftwagen primarily solves this issue by using
+        <a href="https://github.com/kraftwagen/kw-manifests">manifests</a>
+        to sync aspects of Drupal project’s different installations
+        to the same state.  These aspects can be: configuration details in the
+        database, creation of base-line content, setting up static files or
+        any other aspect of a Drupal project that can be controlled from PHP.
       </p>
       <p>
         Kraftwagen extends Drupal with:
@@ -100,15 +107,15 @@
       <dl>
         <dt>Everything in code</dt>
         <dd>We wanted to make sure all the required information to run an 
-          application or website is in the source code. If some developer checks
-          out the project from our Git repository, she should be able the get it
-          running, without a lot of manual steps in Drupal or copying around
-          large database dumps.
+          application or website is in source code. If some developer checks
+          out the project from a repository, he should be able the get it
+          running, without manual steps in Drupal’s admin interface or copying
+          database dumps.
         </dd>
 
-        <dt>Don't reinvent the wheel</dt>
+        <dt>Don’t reinvent the wheel</dt>
         <dd>A lot of effort has already been done in this area and we wanted to
-          build on top of that. That's why Kraftwagen uses the Features module
+          build on top of that. That’s why Kraftwagen uses the Features module
           and is build completely on top of Drush. Some of the most used 
           Kraftwagen commands are only thin convience wrappers around existings 
           commands or sequences of commands. This also means that most concepts
@@ -117,7 +124,7 @@
 
         <dt>Version control independence</dt>
         <dd>
-          We didn't want a tool that locks us completely with Subversion, Git or
+          We didn’t want a tool that locks us completely with Subversion, Git or
           any other version control mechanism. Of course with serious projects
           you'll really want some sort of version control, but your toolchain
           should not depend on it. <em>Currently, there is one Git dependend 
@@ -128,8 +135,8 @@
 
         <dt>Environment awareness</dt>
         <dd>
-          Drupal itself doesn't make any difference between staging, production 
-          and development enviroments. In production you'll want the 
+          Drupal itself doesn’t make any difference between staging, production 
+          and development enviroments. In production you’ll want the 
           <a href="http://drupal.org/project/devel">Devel</a> module disabled,
           while in development environments it should be enabled. When copying
           around database dumps this is almost impossible to do automatically.
