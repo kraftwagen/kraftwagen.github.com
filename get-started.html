@@ -37,6 +37,8 @@
               <li><a href="#new-project"><i class="icon-plus-sign"></i> New project</a></li>
               <li><a href="#setup-project"><i class="icon-bolt"></i> Existing project</a></li>
               <li><a href="#build"><i class="icon-magic"></i> Building</a></li>
+              <li><a href="#initialize"><i class="icon-road"></i> Initialize database</a></li>
+              <li><a href="#update"><i class="icon-refresh"></i> Update database</a></li>
               <li><a href="#conclusion"><i class="icon-ok"></i> Conclusion</a></li>
             </ul>
           </div>
@@ -199,18 +201,270 @@ drush kw-setup</pre>
             
 <pre data-language="shell">
 cd ~/example_project
+mkdir builds
 drush kw-build</pre>
             
             <p>
+              Building involves creating a usable <em>makefile</em> out of 
+              <code>tools/build.make.tpl</code> in your <code>src</code> 
+              directory and then running this makefile though 
+              <code>drush make</code>. During this process, your 
+              <code>src</code> will be copied into <code>profiles/NAME</code>,
+              where <code>NAME</code> is determined by the project key that is
+              used in the <code>build.make.tpl</code>. After running 
+              <code>drush make</code> Kraftwagen will <em>symlink</em> your 
+              settings files and <code>files</code> directory from your 
+              <code>cnf</code> into the <code>sites/default</code> directory in
+              the newly created build.
+            </p>
+            <p>
               By default the build is created in the <code>build</code> 
               directory. If you prefer to keep a directory of all builds and 
-              prefer <code>build</code> to be a symlink to the current build 
+              prefer <code>build</code> to be a symlink to the current build,
               simply create a directory called <code>builds</code> (with an 
               "s"), and Kraftwagen will automatically create the build in there
               and update a symlink from <code>build</code> to the directory of 
               the latest build for you. The <code>build</code> is usually where
               you want to point your webserver at.
             </p>
+
+            <p>
+              Now you have the code for a working Drupal installation, you can 
+              <a href="#initalize">initialize the database</a>.
+            </p>
+          </section>
+
+          <section id="initialize">
+            <div class="page-header">
+              <h2>Initialize the database</h2>
+            </div>
+
+            <p>
+              To run the default Drupal site installation process, you should
+              <em>initialize the database</em> 
+            </p>
+<pre data-language="shell">
+cd ~/example_project/build
+drush kw-id
+</pre>
+            <p>
+              This database initialization actually is not much more than 
+              running <code>drush site-install PROFILE_NAME</code>. Kraftwagen
+              guesses the value of <code>PROFILE_NAME</code> by searching for
+              a <code>.info</code> file in the root of your <code>src</code>
+              directory.
+            </p>
+
+            <p>
+              After the database initialization, you should run the 
+              <a href="#update">update</a> process, to completely synchronize 
+              the database with your code.
+            </p>
+          </section>
+
+          <section id="update">
+            <div class="page-header">
+              <h2>Update the database</h2>
+            </div>
+
+            <p>
+              When your code has changed, it is very likely that your database
+              needs to be synchronized to reflect the new code. 
+            </p>
+
+            <p>
+              Until now, Kraftwagen hasn't done much more for you than copying
+              some files around and creating some symlinks. All Kraftwagen 
+              commands we executed do just that or provide simple convenience 
+              wrappers around existing Drush commands. The updating process is
+              a bit different.
+            </p>
+
+            <h3>Apply module dependencies</h3>
+            <p>
+              Drupal has an excellent way of defining the dependencies of 
+              modules. What was missing is way to automatically enable all 
+              dependencies of an install profile and uninstall all modules that
+              are not required, in a running site. During installation Drupal 
+              figures out the dependencies and enables them, but there is no way
+              to synchronize the database to reflect changes to the code. That's
+              where Kraftwagen comes in.
+            </p>
+
+<pre data-language="shell">
+cd ~/example_project/build
+drush kw-amd development
+</pre>
+            <p>
+              There is one important different in how <code>drush kw-amd</code>
+              works, compared to Drupal core. <code>drush kw-amd</code> supports
+              something called <em>environment dependencies</em>. As you can see
+              in the code above, we supply the environment as an argument to the
+              command. This instructs <code>drush kw-amd</code> to also enable 
+              the modules that are marked as <em>environment dependencies</em>
+              for <code>development</code>. In your <code>.info</code> that 
+              looks like this.
+            </p>
+<pre>
+env_dependencies[development][] = devel
+</pre>
+            <h3>Running <code>hook_update_N</code> implementations</h3>
+            <p>
+              When synchronizing the database to new code, running the 
+              <code>hook_update_N</code> implementations, because those hooks 
+              are the location where database migrations are defined in Drupal.
+              Luckely Drush provides a command to do just that.
+            </p>
+<pre data-language="shell">
+cd ~/example_project/build
+drush updatedb
+</pre>
+            <p>
+              Note that we do not advice you to use the 
+              <code>hook_update_N</code> implementations in your own custom
+              code, other than for schema migrations. Kraftwagen implements a 
+              new way to execute arbitrary database manipulating operations that
+              works much nicer while actively developing a website.
+            </p>
+
+            <h3>Reverting Features</h3>
+            <p>
+              When working with a <em>everything in code</em> workflow, the 
+              Features module is an invaluable tool. Features provides a command
+              to synchronize the database with the defined components.
+            </p>
+<pre data-language="shell">
+cd ~/example_project/build
+drush features-revert-all
+</pre>
+            
+            <h3>Run manifests</h3>
+            <p>
+              Although a lot of different things can be defined using the 
+              Features module, there always are (and will be) definitions of
+              desired database state that cannot be creating using Features.
+              You need a way to execute arbitrary database manipulating 
+              operations.
+            </p>
+            <p>
+              As already stated, Drupal provides a method to define database
+              migrations in the <code>hook_update_N</code> implementations. This
+              works fine for schema migrations, but when actively developing a
+              website using them, you'll come to the conclusion that this method
+              has some serious drawbacks.
+            </p>
+
+            <dl class="dl-horizontal">
+              <dt>Executed only once</dt>
+              <dd>
+                When you defined something in a <code>hook_update_N</code>
+                implementation, you cannot change it anymore. After a few 
+                changes of mind by your client, you end up with an 
+                unmaintainable and lengthy collection of functions of which the
+                majority is not required anymore.
+              </dd>
+              <dt>Numbered</dt>
+              <dd>
+                For schema migrations, it makes sense to let some numeric 
+                property define the schema version. For our use cases it becomes
+                very irritating. While Bob defined 
+                <code>mymodule_update_12</code>, Alice also defined it. Good 
+                luck while solving that merge conflict.
+              </dd>
+            <dl>
+
+            <p>
+              Kraftwagen introduces a new concept that solve this. We call this
+              solution <em>manifests</em> and we implemented it in a 
+              <a href="https://github.com/kraftwagen/kw-manifests">separate 
+              module</a>. Because it is a separate module which does not depend
+              on the existance of the Kraftwagen Drush extension, you can also
+              savely use it outside the context of a Kraftwagen project.
+            </p>
+
+            <p>
+              In short, <em>manifests</em> are 
+              <a href="http://en.wikipedia.org/wiki/Idempotence">idempotent</a>,
+              named migrations that can be defined in a module. The idempotence
+              means that the can savely be executed multiple times.
+            </p>
+
+            <p>
+              Manifests are registered in a module's <code>.info</code> file
+              using <code>hook_kw_manifests_info()</code>.
+            </p>
+<pre data-language="php">
+/**
+ * Implements hook_kw_manifests_info().
+ */
+function mymodule_kw_manifests_info() {
+  $manifests = array();
+
+  $manifests['my_manifest'] = array(
+    'callback' => 'mymodule_manifest_define_homepage',
+  );
+
+  return $manifests;
+}
+
+function mymodule_manifest_define_homepage() {
+  kw_itemnames_ensure(
+    'node', 
+    'homepage', 
+    array(
+      'title' => 'Welcome!', 
+    ),
+    array(
+      'type' => 'page', 
+      'language' => LANGUAGE_NONE,
+      'body' => array(
+        LANGUAGE_NONE => array(array(
+          'value' => '<p>Welcome to my site!</p>',
+          'format' => 'filtered_html',
+        ))
+      )
+    )
+  );
+}
+</pre>
+            <p>
+              As you can see, a manifest is actually simply a PHP function that
+              gets executed. In this example we also use the 
+              <a href="https://github.com/kraftwagen/kw-itemnames">Kraftwagen
+              Itemnames</a> module to define the existance of a certain node
+              as the desired database state. Take a look at the documentation of
+              Kraftwagen Itemnames for more information. For now, all you need
+              to know is, that <code>kw_itemnames_ensure('node', ...)</code>
+              creates a node if it does not exist and updates it, if it already
+              exists.
+            </p>
+
+            <p>
+              Take a look at the documentation of Kraftwagen Manifests for the
+              other options for manifests, other than the callback. It is for 
+              example possible to define that a manifest depends on another 
+              manifest and limit manifests to specific environments.
+            </p>
+            <p>
+              Kraftwagen Manifests registers a Drush command to run all 
+              manifests. Just like <code>drush kw-amd</code> it accepts the
+              environment as an argument.
+            </p>
+<pre data-language="shell">
+cd ~/example_project/build
+drush kw-m development
+</pre>
+
+            <h3>Combining all the commands</h3>
+            <p>
+              Kraftwagen provides a simple command that figures out the 
+              enviroment (so you don't need to specify it) and then runs the
+              above four commands to update your site.
+            </p>
+<pre data-language="shell">
+cd ~/example_project/build
+drush kw-u
+</pre>
           </section>
 
           <section id="conclusion">
@@ -222,21 +476,20 @@ drush kw-build</pre>
               <a href="https://github.com/kraftwagen">GitHub</a>!
             </p>
           </section>
+          <footer>
+            <hr />
+            <p>
+              Spread the news: <span class="st_twitter"></span><span class="st_facebook" ></span><span class="st_googleplus"></span><span class="st_linkedin"></span>
+            </p>
+            <p>
+              Development of Kraftwagen is sponsored by&nbsp;&nbsp;<a href="http://hoppinger.com/" class="hoppinger"><img src="img/hoppinger.png" alt="Hoppinger" /></a>
+            </p>
+            <p>
+              This work is licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a> 
+            </p>
+          </footer>
         </div>
       </div>
-
-      <footer>
-        <hr />
-        <p>
-          Spread the news: <span class="st_twitter"></span><span class="st_facebook" ></span><span class="st_googleplus"></span><span class="st_linkedin"></span>
-        </p>
-        <p>
-          Development of Kraftwagen is sponsored by&nbsp;&nbsp;<a href="http://hoppinger.com/" class="hoppinger"><img src="img/hoppinger.png" alt="Hoppinger" /></a>
-        </p>
-        <p>
-          This work is licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a> 
-        </p>
-      </footer>
     </div>
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
