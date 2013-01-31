@@ -115,13 +115,13 @@ drush kw-new-project</pre>
               The source of a Kraftwagen project is a
               <a href="http://drupal.org/developing/distributions">Drupal 
               install profile</a>. Both Drupal core and contributed modules are
-              pulled in using Drush' own <code>make</code> command and some 
+              pulled in using Drush’ own <code>make</code> command and some 
               <code>.make</code> files. This way <em>your</em> repository only
               contains <strong>your</strong> code.
             </p>
 
             <p>
-              You're now at the same state as 
+              You’re now at the same state as 
               <a href="#setup-project-sub">after checking out an existing 
               project</a>.
             </p>
@@ -184,7 +184,7 @@ drush kw-setup</pre>
             </p>
 
             <p>
-              You're now ready to <a href="#build">build</a> your first 
+              You’re now ready to <a href="#build">build</a> your first 
               Kraftwagen managed Drupal installation.
             </p>
           </section>
@@ -196,7 +196,7 @@ drush kw-setup</pre>
 
             <p>
               The source of the project is not a working Drupal installation. It
-              doesn't even contain Drupal itself. It needs to be <em>build</em>.
+              doesn’t even contain Drupal itself. It needs to be <em>build</em>.
             </p>
             
 <pre data-language="shell">
@@ -273,7 +273,7 @@ drush kw-id
             </p>
 
             <p>
-              Until now, Kraftwagen hasn't done much more for you than copying
+              Until now, Kraftwagen hasn’t done much more for you than copying
               some files around and creating some symlinks. All Kraftwagen 
               commands we executed do just that or provide simple convenience 
               wrappers around existing Drush commands. The updating process is
@@ -287,7 +287,7 @@ drush kw-id
               dependencies of an install profile and uninstall all modules that
               are not required, in a running site. During installation Drupal 
               figures out the dependencies and enables them, but there is no way
-              to synchronize the database to reflect changes to the code. That's
+              to synchronize the database to reflect changes to the code. That’s
               where Kraftwagen comes in.
             </p>
 
@@ -350,7 +350,7 @@ drush features-revert-all
               As already stated, Drupal provides a method to define database
               migrations in the <code>hook_update_N</code> implementations. This
               works fine for schema migrations, but when actively developing a
-              website using them, you'll come to the conclusion that this method
+              website using them, you’ll come to the conclusion that this method
               has some serious drawbacks.
             </p>
 
@@ -390,7 +390,7 @@ drush features-revert-all
             </p>
 
             <p>
-              Manifests are registered in a module's <code>.info</code> file
+              Manifests are registered in a module’s <code>.info</code> file
               using <code>hook_kw_manifests_info()</code>.
             </p>
 <pre data-language="php">
@@ -458,7 +458,7 @@ drush kw-m development
             <h3>Combining all the commands</h3>
             <p>
               Kraftwagen provides a simple command that figures out the 
-              enviroment (so you don't need to specify it) and then runs the
+              enviroment (so you don’t need to specify it) and then runs the
               above four commands to update your site.
             </p>
 <pre data-language="shell">
