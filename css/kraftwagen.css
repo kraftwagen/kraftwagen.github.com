@@ -197,4 +197,9 @@ a.fork-me:hover {
   .hero-unit li {
     margin-bottom: 10px;
   }
+
+  .announce, .hero-unit {
+    margin-bottom: 20px;
+    padding: 30px 20px;
+  }
 }
