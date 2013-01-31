@@ -66,6 +66,23 @@ header.get-started {
   text-align: center;
 }
 
+.announce {
+  padding: 30px 60px;
+  margin-bottom: 30px;
+  background-color: #eeeeee;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+.announce p, .announce h2 {
+  text-align: center;
+}
+.announce h2 {
+  color: #aa0000;
+  font-size: 50px;
+  line-height: 70px;
+}
+
 footer {
   margin-top: 70px;
 }
