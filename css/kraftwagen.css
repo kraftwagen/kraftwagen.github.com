@@ -109,6 +109,11 @@ code {
   font-size: 12px;
   white-space: nowrap;
 }
+
+h3 {
+  font-size: 20px;
+  line-height: 25px;
+}
 h3 code {
   font-size: 14px;
   padding: 4px 5px 3px 5px;
