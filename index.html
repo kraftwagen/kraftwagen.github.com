@@ -32,14 +32,17 @@
       <div class="hero-unit">
         <h1><img src="/img/logo.png" alt="Kraftwagen" /></h1>
         <p class="tag-line">
-          Drupal for large (distributed) development teams and staged 
-          deployments.
+          Drupal for (distributed) development teams
+          <br/>
+          and reliable, staged, single-command deployments
         </p>
         <p>
           <ul>
-            <li><i class="icon-hand-right"></i> Everything in code&trade;, under version control</li>
+            <li><i class="icon-hand-right"></i> Storing configuration as code, in version control; instead of in the database.</li>
+            <li><i class="icon-hand-right"></i> <em>Referring</em> to <abbr title="Drupal core, contrib modules and external libraries">3rd party code</abbr> instead of copying them into your project.</li>
             <li><i class="icon-hand-right"></i> Multiple deployment targets (local, staging, production, etc.)</li>
-            <li><i class="icon-hand-right"></i> Kick-start new projects from <a href="https://github.com/kraftwagen/skeleton">skeletons</a></li>
+            <li><i class="icon-hand-right"></i> Single-command deployments with <a href="https://github.com/kraftwagen/capwagen">Capistrano</a>.</li>
+            <li><i class="icon-hand-right"></i> Kick-start new projects from <a href="https://github.com/kraftwagen/skeleton">skeletons</a>.</li>
           </ul>
         </p>
         <p>
@@ -51,9 +54,9 @@
         <h2>Drupal + Kraftwagen = Drupal for developers</h2>
       </div>
       <p>
-        One of <a href="http://drupal.org/">Drupal</a>’s core values is 
+        One of <a href="http://drupal.org/">Drupal</a>’s core values is
         “easy to use”.  Yet what that means to
-        end-users (who uses FTP to upload Drupal to a web host, and customizes
+        end-users (who use FTP to upload Drupal to a web host, and customize
         it through the admin interface), is different from what that means to
         developers (who customize Drupal extensively, need staged deployments
         and use version control systems to collaborate).
@@ -72,15 +75,15 @@
         and <a href="https://github.com/kraftwagen">hosted on github</a>.
         It reuses existing work where possible, for example:
         <a href="http://drupal.org/project/distributions">install profiles</a>,
-        <a href="http://drupal.org/project/drush_make">Drush Make</a>,
+        <a href="https://github.com/drush-ops/drush">Drush</a> Make,
         <a href="http://drupal.org/project/features">Features</a>,
-        version control systems (git, subversion, mercurial, etc.) and soon
-        <a href="https://github.com/capistrano/capistrano">Capistrano</a>.
+        version control systems (git, subversion, mercurial, etc.) and
+        <a href="http://capistranorb.com">Capistrano</a>.
       </p>
       <p>
         Because Drupal stores a lot a configuration details in the database,
         version control systems cannot be used to track changes. This makes it
-        hard for a team of developers to collaborate or to stage changes to a
+        hard for a team of developers to collaborate, or to stage changes to a
         separate deployment target before rolling them out in production.
         Kraftwagen primarily solves this issue by using
         <a href="https://github.com/kraftwagen/kw-manifests">manifests</a>
@@ -101,6 +104,8 @@
           <li>The <b><a href="https://github.com/kraftwagen/kw-manifests">kw-manifests</a></b> Drupal module
             &mdash; adds support idempotent migrations (manifests).</li>
         </ul>
+        Besides these extensions an <a href="https://github.com/kraftwagen/capwagen">integration with Capistrano</a>
+        facilitates single-command deployments. A must in the age of continuous delivery.
       </p>
 
       <div class="page-header">
@@ -109,8 +114,8 @@
       <p>
         The following goals were set when developing Krafwagen:
       <dl>
-        <dt>Everything in code</dt>
-        <dd>We wanted to make sure all the required information to run an 
+        <dt>Everything in code&trade;</dt>
+        <dd>We wanted to make sure all the required information to run an
           application or website is in source code. If some developer checks
           out the project from a repository, he should be able the get it
           running, without manual steps in Drupal’s admin interface or copying
@@ -119,9 +124,8 @@
 
         <dt>Don’t reinvent the wheel</dt>
         <dd>A lot of effort has already been done in this area and we wanted to
-          build on top of that. That’s why Kraftwagen uses the Features module
-          and is built completely on top of Drush. Some of the most used 
-          Kraftwagen commands are only thin convience wrappers around existings 
+          build on top of that. That’s why Kraftwagen is built on top of Drush.
+          Kraftwagen commands are only thin convience wrappers around existings
           commands or sequences of commands. This also means that most concepts
           in Kraftwagen should sound familiar to any seasoned Drupal developer.
         </dd>
@@ -129,21 +133,22 @@
         <dt>Version control independence</dt>
         <dd>
           We didn’t want a tool that completely locks us into Subversion, Git or
-          any other version control mechanism. Of course with serious projects
-          you’ll really want some sort of version control, but your toolchain
-          should not depend on it. <em>Currently, there is one Git dependent 
-          command. The command to start a new project uses Git to download the 
-          skeleton. We are looking at a way to elegantly solve this, while 
-          keeping the convenience of the current command.</em>
+          any other version control mechanism. Of course we all love version control
+          and use it whenever we can, but a toolchain should not depend on a specific
+          flavor of version control. <em>Currently there is one Git dependent
+          command: the command to start a new project uses Git to download the
+          <a href="https://github.com/kraftwagen/skeleton">skeleton</a>.</em>
         </dd>
 
         <dt>Environment awareness</dt>
         <dd>
-          Drupal itself doesn’t make any difference between staging, production 
-          and development environments. In production you’ll want the 
+          Drupal itself doesn’t make any difference between staging, production
+          and development environments. In production you’ll want the
           <a href="http://drupal.org/project/devel">Devel</a> module disabled,
           while in development environments it should be enabled. When copying
           around database dumps this is almost impossible to do automatically.
+          Kraftwagen’s <a href="https://github.com/kraftwagen/kw-environment">kw-environment</a>
+          module extends Drupal with the notion of environments.
         <dt>
 
         <dt>Transparent in use</dt>
@@ -157,6 +162,29 @@
       </dl>
       </p>
 
+      <div class="page-header">
+        <h2>Contribute</h2>
+      </div>
+      <p>
+        Kraftwagen is a open source project that welcomes contributions from the community.
+        All development happens on our <a href="https://github.com/kraftwagen">Github</a>
+        respositories; needless to say that we welcome pull-requests and issue tickets.
+      </p>
+      <p>
+        There is also a <a href="https://groups.google.com/forum/#!forum/kraftwagen">mailing list for Kraftwagen</a>,
+        it allows for discussions, sharing of insights and posts of otherwise Kraftwagen related
+        stuff. We will also announce release there, so make sure to subscribe.
+      </p>
+
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+
+      <p class="center">
+        <a href="/get-started.html" class="btn btn-kraftwagen btn-huge"><i class="icon-cogs"></i> Get started!</a>
+      </p>
+
+      <p>&nbsp;</p>
+
       <footer>
         <hr />
         <p>
@@ -166,7 +194,7 @@
           Development of Kraftwagen is sponsored by&nbsp;&nbsp;<a href="http://hoppinger.com/" class="hoppinger"><img src="img/hoppinger.png" alt="Hoppinger" /></a>
         </p>
         <p>
-          This work is licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a> 
+          This work is licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>
         </p>
       </footer>
 
